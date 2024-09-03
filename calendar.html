@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Booking</title>
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            background: #f0f0f0;
+            color: #333;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            overflow: hidden; 
+        }
+
+        .calendarbooking-container {
+            background: #fff;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
+            width: 100%;
+            max-width: 400px;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            transition: transform 0.5s ease, opacity 0.5s ease;
+            z-index: 1;
+        }
+
+        h1 {
+            text-align: center;
+            color: #007BFF;
+            margin-bottom: 20px;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: bold;
+        }
+
+        input[type="date"], input[type="time"], input[type="number"] {
+            width: calc(100% - 20px);
+            padding: 10px;
+            margin-bottom: 20px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            font-size: 16px;
+            box-sizing: border-box;
+        }
+
+        .calendar-icon {
+            position: relative;
+        }
+
+        .calendar-icon::before {
+            content: "📅";
+            font-size: 24px;
+            position: absolute;
+            top: 50%;
+            left: 10px;
+            transform: translateY(-50%);
+        }
+
+        input[type="date"] {
+            padding-left: 40px;
+        }
+
+        .button-group {
+            display: flex;
+            justify-content: space-between;
+        }
+
+        button {
+            width: calc(33.33% - 10px);
+            padding: 10px;
+            font-size: 16px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        button[type="button"] {
+            background-color: #6c757d;
+            color: #fff;
+        }
+
+        button[type="submit"] {
+            background-color: #007BFF;
+            color: #fff;
+        }
+
+        button:hover {
+            background-color: #0056b3;
+        }
+
+        button[type="button"]:hover {
+            background-color: #5a6268;
+        }
+
+        .floating-alert {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            background-color: #f44336;
+            color: white;
+            padding: 15px;
+            border-radius: 5px;
+            z-index: 1000;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            display: none;
+        }
+    </style>
+</head>
+<body>
+    <div class="calendarbooking-container">
+        <h1>Book Your Stay</h1>
+        <form id="bookingForm" action="process_booking.php" method="POST" onsubmit="return validateForm(event)">
+            <label for="check-in">Check-In Date:</label>
+            <input type="date" id="check-in" name="check-in" required>
+    
+            <label for="check-out">Check-in Time:</label>
+            <input type="time" id="check-out" name="check-out" required>
+    
+            <label for="guests">Number of Guests:</label>
+            <input type="number" id="guests" name="guests" min="1" max="10" required>
+    
+            <div class="button-group">
+                <button type="button" onclick="window.location.href='economy.html'">Cancel</button>
+                <button type="submit" id="half-payment">Half Payment</button>
+                <button type="submit" id="full-payment">Full Payment</button>
+            </div>
+        </form>
+    </div>
+    
+    <div id="alert" class="floating-alert">
+        Please fill in all the required fields.
+    </div>
+
+    <script>
+    function validateForm(event) {
+        const checkIn = document.getElementById('check-in').value;
+        const checkOut = document.getElementById('check-out').value;
+        const guests = document.getElementById('guests').value;
+
+        if (!checkIn || !checkOut || !guests) {
+            event.preventDefault(); // Prevent form submission
+            showAlert(); // Show the floating alert
+            return false; // Return false to prevent further execution
+        }
+
+        return true; // Allow form submission if all fields are filled
+    }
+
+    function showAlert() {
+        const alertBox = document.getElementById('alert');
+        alertBox.style.display = 'block';
+
+        setTimeout(() => {
+            alertBox.style.display = 'none';
+        }, 3000);
+    }
+
+    document.getElementById('half-payment').addEventListener('click', () => {
+        document.getElementById('half-payment').value = 'half';
+    });
+
+    document.getElementById('full-payment').addEventListener('click', () => {
+        document.getElementById('full-payment').value = 'full';
+    });
+    </script>
+</body>
+</html>

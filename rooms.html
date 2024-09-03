@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Booking Section</title>
+    <style>
+        .unique-container {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            align-items: flex-start;
+            height: 100vh; /* Ensure the container takes up the full viewport height */
+            padding: 20px; /* Add padding if needed */
+        }
+        .place-section {
+            background-color: #f4f4f4;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            overflow: hidden;
+            width: 300px;
+            text-align: center;
+            padding: 20px;
+            margin: 10px;
+            flex-shrink: 0; /* Prevent shrinking */
+        }
+        .place-section img {
+            width: 100%;
+            height: auto;
+            border-radius: 10px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        .place-section img.enlarged {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 80%;
+            height: auto;
+            z-index: 1000;
+            border-radius: 0;
+        }
+        .overlay {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.5);
+            z-index: 999;
+        }
+        .place-section h3 {
+            margin: 15px 0;
+            font-size: 1.5em;
+            color: #333;
+        }
+        .place-section .actions {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-top: 15px;
+        }
+        .place-section .reviews i {
+            color: #ffcc00;
+            font-size: 1.2em;
+            margin-left: 150px;
+        }
+        .place-section button {
+            background-color: #28a745;
+            color: #fff;
+            border: none;
+            border-radius: 5px;
+            padding: 10px 20px;
+            font-size: 1em;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+        .place-section button:hover {
+            background-color: #218838;
+        }
+    </style>
+    <!-- Add Font Awesome for the star icon -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css">
+</head>
+<body>
+
+<div class="overlay" id="overlay"></div>
+
+<div class="unique-container">
+    <div class="place-section">
+        <img src="cashier.jpg" alt="Photo" class="photo">
+        <h3>Sleepwell Apartelle</h3>
+        <div class="actions">
+            <button onclick="window.location.href='booking.html'">Book Now</button>
+            <div class="reviews">
+                <i class="fa fa-star"></i>
+            </div>
+        </div>
+    </div>
+
+    <div class="place-section">
+        <img src="cashier.jpg" alt="Photo" class="photo">
+        <h3>Sleepwell Apartelle</h3>
+        <div class="actions">
+            <button onclick="window.location.href='booking.html'">Book Now</button>
+            <div class="reviews">
+                <i class="fa fa-star"></i>
+            </div>
+        </div>
+    </div>
+
+    <div class="place-section">
+        <img src="cashier.jpg" alt="Photo" class="photo">
+        <h3>Sleepwell Apartelle</h3>
+        <div class="actions">
+            <button onclick="window.location.href='booking.html'">Book Now</button>
+            <div class="reviews">
+                <i class="fa fa-star"></i>
+            </div>
+        </div>
+    </div>
+
+    <div class="place-section">
+        <img src="cashier.jpg" alt="Photo" class="photo">
+        <h3>Sleepwell Apartelle</h3>
+        <div class="actions">
+            <button onclick="window.location.href='booking.html'">Book Now</button>
+            <div class="reviews">
+                <i class="fa fa-star"></i>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    const photos = document.querySelectorAll('.photo');
+    const overlay = document.getElementById('overlay');
+
+    photos.forEach(photo => {
+        photo.addEventListener('click', () => {
+            photo.classList.add('enlarged');
+            overlay.style.display = 'block';
+        });
+    });
+
+    overlay.addEventListener('click', () => {
+        document.querySelectorAll('.photo').forEach(photo => {
+            photo.classList.remove('enlarged');
+        });
+        overlay.style.display = 'none';
+    });
+</script>
+
+</body>
+</html>

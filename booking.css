@@ -1,0 +1,358 @@
+body {
+    font-family: 'Roboto', sans-serif;
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    color: #333;
+}
+
+.container {
+    width: 80%;
+    margin: 0 auto;
+}
+
+.navbar {
+    background-color: #333;
+    color: white;
+    padding: 1em 0;
+}
+
+.navbar .logo {
+    font-size: 1.5em;
+    font-weight: 700;
+}
+
+.nav-links {
+    list-style: none;
+    display: flex;
+    justify-content: flex-end;
+}
+
+.nav-links li {
+    margin-left: 2em;
+}
+
+.nav-links a {
+    color: white;
+    text-decoration: none;
+    font-weight: 500;
+} 
+
+.hero-section {
+    background: linear-gradient(to right, #ff5a5f, #9013fe);
+    color: white;
+    text-align: center;
+    padding: 5em 0;
+}
+
+.hero-section h1 {
+    font-size: 2.5em;
+    margin-bottom: 0.5em;
+}
+
+.booking-form {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+
+.form-group {
+    margin: 0.5em;
+}
+
+.form-group label {
+    display: block;
+    margin-bottom: 0.5em;
+}
+
+.form-group input {
+    padding: 0.5em;
+    border: none;
+    border-radius: 5px;
+}
+
+.booking-form button {
+    padding: 0.75em 2em;
+    background-color: #ff5a5f;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    margin-top: 1em;
+}
+.services-section{
+    padding: 5em 0;
+    text-align: center;
+    width:100%;
+    height: auto;
+}
+.rooms-section, .aboutus-section {
+    padding: 5em 0;
+    text-align: center;
+    width:100%;
+    height:auto;
+}
+
+.room-cards {
+    display: flex;
+    justify-content: space-around;
+    flex-wrap: wrap;
+}
+
+.room-card {
+    background-color: #f5f5f5;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    overflow: hidden;
+    margin: 1em;
+    width: 30%;
+    text-align: left;
+}
+
+.room-card img {
+    width: 100%;
+    height: auto;
+}
+
+.room-card h3 {
+    margin: 1em 0 0.5em 1em;
+}
+
+.room-card p {
+    margin: 0 1em 1em 1em;
+}
+
+.room-card button {
+    background-color: #ff5a5f;
+    color: white;
+    border: none;
+    border-radius: 0 0 10px 10px;
+    padding: 1em;
+    width: 100%;
+    cursor: pointer;
+}
+
+.aboutus-list {
+    list-style: none;
+    padding: 0;
+}
+
+.aboutus-list li {
+    display: inline-block;
+    margin: 0.5em 1em;
+    background-color: #eee;
+    padding: 0.5em 1em;
+    border-radius: 5px;
+}
+
+.container::after {
+    content: "";
+    display: table;
+    clear: both;
+}
+
+.contact-section {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 50px 0;  /* Added padding for spacing */
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    position: relative;
+    height: auto; /* Remove height: 100vh */
+}
+.contact-container {
+    text-align: center;
+    background-color: rgba(255, 255, 255, 0.8); /* Semi-transparent background to ensure text visibility */
+    padding: 20px;
+    border-radius: 10px;
+    z-index: 1; /* Ensures the content is above the background */
+}
+.contact-container img {
+    width: 50px;
+    margin: 10px;
+    cursor: pointer;
+}
+.popup {
+    display: none;
+    position: absolute;
+    background-color: #333;
+    color: #fff;
+    padding: 10px;
+    border-radius: 5px;
+    top: 10px; /* Adjust this as needed */
+    z-index: 2; /* Ensures the popup appears above the content */
+}
+.popup .close-btn {
+    cursor: pointer;
+    color: #ff0000;
+    font-weight: bold;
+    margin-left: 10px;
+}
+.footer {
+    background-color: #333;
+    color: white;
+    text-align: center;
+    padding: 1em 0;
+}
+#building, #map {
+    width: 42%;
+    margin-bottom: 10px;
+}
+#building{
+    margin-left: 88px;
+    float: left;
+}
+#building img {
+    width: 100%; 
+    height: 450px;
+}
+
+#map {
+    height: 450px;
+    float: left;
+    margin-left: 20px;
+}
+.rooms-section, .aboutus-section, .contact-section {
+    clear: both; /* Ensure these sections clear previous floats */
+}
+.feedback-form {
+    margin-top: 20px;
+    background-color: rgba(255, 255, 255, 0.8);
+    padding: 20px;
+    border-radius: 10px;
+}
+
+.feedback-form .form-group {
+    margin-bottom: 15px;
+}
+
+.feedback-form label {
+    display: block;
+    margin-bottom: 5px;
+}
+
+.feedback-form input,
+.feedback-form textarea {
+    width: 100%;
+    padding: 10px;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+}
+
+.feedback-form button {
+    background-color: #ff5a5f;
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.feedback-form button:hover {
+    background-color: #e04a50;
+}
+/* Place Section Specific CSS */
+.unique-place-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.unique-place-heading {
+    font-size: 2em;
+    margin-bottom: 10px;
+}
+
+.unique-place-row {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+.unique-place-item {
+    background-color: #f4f4f4;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    overflow: hidden;
+    width: 300px;
+    margin: 10px;
+    text-align: center;
+    position: relative;
+}
+
+.unique-place-photo {
+    width: 100%;
+    height: auto;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+.unique-place-photo.enlarged {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: auto; 
+    height: auto; 
+    max-width: 80%; 
+    max-height: 80%; 
+    z-index: 1000;
+    border-radius: 0;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); 
+}
+
+
+.unique-place-title {
+    margin: 15px 0;
+    font-size: 1.5em;
+    color: #333;
+    margin-left:-100px;
+}
+.unique-place-p{
+    float:right;
+    margin-top:-40px;
+}
+.unique-place-actions {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-top: 15px;
+}
+
+.unique-place-book-now-button {
+    background-color: #28a745;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    padding: 10px 20px;
+    font-size: 1em;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.unique-place-book-now-button:hover {
+    background-color: #218838;
+}
+
+.unique-place-reviews {
+    margin-left: 10px;
+}
+
+.unique-place-star-icon {
+    color: #ffcc00;
+    font-size: 1.2em;
+    margin-left: 150px;
+}
+
+/* Overlay CSS */
+.unique-overlay {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.5);
+    z-index: 999;
+}

@@ -1,0 +1,242 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Economy Room</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 20px;
+            background-color: #f0f0f0;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+        }
+
+        .photo-container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            justify-content: center;
+            max-width: 1200px;
+            width: 100%;
+        }
+
+        .photo-wrapper {
+            flex: 1 1 calc(20% - 10px);
+            max-width: calc(20% - 10px);
+            overflow: hidden;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: transform 0.3s ease;
+        }
+
+        .photo-wrapper img {
+            width: 100%;
+            height: auto;
+            display: block;
+        }
+
+        .photo-wrapper:hover {
+            transform: scale(1.05);
+        }
+
+        .overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.8);
+            display: none;
+            justify-content: center;
+            align-items: center;
+            z-index: 1000;
+            padding: 20px;
+            box-sizing: border-box;
+        }
+
+        .overlay.active {
+            display: flex;
+        }
+
+        .overlay img {
+            max-width: 90%;
+            max-height: 90%;
+            border-radius: 10px;
+            transition: transform 0.3s ease;
+        }
+
+        .overlay img.enlarge {
+            transform: scale(1.1);
+        }
+
+        .buttons-container {
+            margin-top: 20px;
+            display: flex;
+            gap: 20px;
+        }
+
+        .buttons-container button {
+            padding: 10px 20px;
+            font-size: 16px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        .buttons-container button:hover {
+            background-color: #ddd;
+        }
+
+        .go-back-button {
+            background-color: #2196f3;
+            color: white;
+        }
+
+        .reserve-button {
+            background-color: #4caf50;
+            color: white;
+        }
+
+        .pricing-options {
+            margin-top: 20px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .pricing-option {
+            display: flex;
+            align-items: center;
+            margin-bottom: 10px;
+            cursor: pointer;
+        }
+
+        .pricing-option input {
+            appearance: none;
+            -webkit-appearance: none;
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+            border: 2px solid #2196f3;
+            margin-right: 10px;
+            position: relative;
+        }
+
+        .pricing-option input:checked::before {
+            content: "";
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+            background: #2196f3;
+            transform: translate(-50%, -50%);
+        }
+
+        .pricing-option label {
+            font-size: 16px;
+        }
+
+        @media (max-width: 800px) {
+            .photo-wrapper {
+                flex: 1 1 calc(45% - 10px);
+                max-width: calc(45% - 10px);
+            }
+        }
+
+        @media (max-width: 500px) {
+            .photo-wrapper {
+                flex: 1 1 100%;
+                max-width: 100%;
+            }
+        }
+    </style>
+</head>
+<body>
+    <form id="reservationForm" action="calendar.html" method="GET">
+        <div class="photo-container">
+            <div class="photo-wrapper">
+                <img src="ER1.jpg" alt="Photo 1">
+            </div>
+            <div class="photo-wrapper">
+                <img src="ER2.jpg" alt="Photo 2">
+            </div>
+            <div class="photo-wrapper">
+                <img src="ER3.jpg" alt="Photo 3">
+            </div>
+            <div class="photo-wrapper">
+                <img src="ER4.jpg" alt="Photo 4">
+            </div>
+            <div class="photo-wrapper">
+                <img src="ER5.jpg" alt="Photo 5">
+            </div>
+        </div>
+
+        <div class="pricing-options">
+            <div class="pricing-option">
+                <input type="radio" id="option1" name="pricing" value="380" >
+                <label for="option1">6 hours for ₱380.00</label>
+            </div>
+            <div class="pricing-option">
+                <input type="radio" id="option2" name="pricing" value="750" >
+                <label for="option2">12 hours for ₱750.00</label>
+            </div>
+            <div class="pricing-option">
+                <input type="radio" id="option3" name="pricing" value="1100" >
+                <label for="option3">24 hours for ₱1,100.00</label>
+            </div>
+        </div>
+
+        <div class="buttons-container">
+            <button class="go-back-button" type="button" onclick="window.location.href='booking.html'">Go Back</button>
+            <button class="reserve-button" type="submit">Reserve</button>
+        </div>
+
+        <div class="overlay" id="overlay">
+            <img id="overlayImage" src="" alt="Enlarged Photo">
+        </div>
+    </form>
+
+    <script>
+        const photoWrappers = document.querySelectorAll('.photo-wrapper');
+        const overlay = document.getElementById('overlay');
+        const overlayImage = document.getElementById('overlayImage');
+        const reservationForm = document.getElementById('reservationForm');
+
+        photoWrappers.forEach(wrapper => {
+            wrapper.addEventListener('click', () => {
+                const imgSrc = wrapper.querySelector('img').src;
+                overlayImage.src = imgSrc;
+                overlayImage.classList.add('enlarge');
+                overlay.classList.add('active');
+            });
+        });
+
+        overlay.addEventListener('click', (e) => {
+            if (e.target !== overlayImage) {
+                overlay.classList.remove('active');
+                overlayImage.classList.remove('enlarge');
+            }
+        });
+
+        reservationForm.addEventListener('submit', (event) => {
+            const selectedOption = document.querySelector('input[name="pricing"]:checked');
+            if (!selectedOption) {
+                alert('Please select a pricing option.');
+                event.preventDefault();  // Prevents the form submission
+            } else {
+                localStorage.setItem('selectedPricing', selectedOption.value);
+            }
+        });
+
+    </script>
+</body>
+</html>

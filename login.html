@@ -1,0 +1,258 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login Page</title>
+    <style>
+        /* Reset default browser styles */
+        body, html {
+            margin: 0;
+            padding: 0;
+            font-family: 'Poppins', sans-serif;
+            height: 100vh;
+            overflow: hidden;
+        }
+
+        .container {
+            display: flex;
+            height: 100%;
+            width: 100%;
+            flex-direction: row;
+            transition: transform 0.3s ease;
+        }
+
+        .welcome-section, .login-section {
+            flex: 1;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 2rem;
+            box-sizing: border-box;
+        }
+
+        .welcome-section {
+            background-color: rgba(0, 0, 0, 0.1);
+            color: #333;
+        }
+
+        .login-section {
+            background: white;
+            border-radius: 12px;
+            box-shadow: 8px 8px 16px rgba(0, 0, 0, 0.1), -8px -8px 16px rgba(255, 255, 255, 0.3);
+            position: relative;
+            transition: opacity 0.3s ease;
+        }
+
+        .welcome-text {
+            text-align: center;
+            font-size: 2rem;
+            font-weight: bold;
+        }
+
+        .login-form, .register-form {
+            width: 100%;
+            max-width: 400px;
+        }
+
+        .login-form h2, .register-form h2 {
+            margin-bottom: 1rem;
+            text-align: center;
+            color: #333;
+            font-size: 1.5rem;
+            font-weight: bold;
+        }
+
+        .form-group {
+            margin-bottom: 1rem;
+            position: relative;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 0.5rem;
+            color: #444;
+            font-size: 1rem;
+        }
+
+        .form-group input {
+            width: 100%;
+            padding: 0.75rem;
+            border: 2px solid #ddd;
+            border-radius: 6px;
+            box-sizing: border-box;
+            font-size: 1rem;
+            transition: border-color 0.3s;
+        }
+
+        .form-group input:focus {
+            border-color: #4a90e2;
+            outline: none;
+        }
+
+        .btn {
+            width: 100%;
+            padding: 0.75rem;
+            background-color: #4a90e2;
+            color: #fff;
+            border: none;
+            border-radius: 6px;
+            font-size: 1.1rem;
+            cursor: pointer;
+            transition: background-color 0.3s, transform 0.3s;
+        }
+
+        .btn:hover {
+            background-color: #357abd;
+            transform: translateY(-2px);
+        }
+
+        .toggle-btn {
+            margin-top: 1rem;
+            text-align: center;
+            color: #4a90e2;
+            font-weight: bold;
+            cursor: pointer;
+        }
+
+        .toggle-password {
+            position: absolute;
+            right: 10px;
+            top: 50%;
+            transform: translateY(-50%);
+            cursor: pointer;
+        }
+
+        @media (max-width: 600px) {
+            .welcome-text {
+                font-size: 1.5rem;
+            }
+
+            .form-group label {
+                font-size: 0.8rem;
+            }
+
+            .form-group input, .btn {
+                font-size: 0.9rem;
+            }
+
+            .login-form h2, .register-form h2 {
+                font-size: 1.25rem;
+            }
+        }
+
+        .logout-btn {
+            margin-top: 1rem;
+            text-align: center;
+            color: red;
+            font-weight: bold;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="welcome-section">
+            <div class="welcome-text">
+                <p>WELCOME TO SLEEPWELL, WE'RE GLAD YOU'RE HERE</p>
+                <p class="toggle-btn" onclick="redirectToAdmission()">Log in to Admission</p>
+            </div>
+        </div>
+        <div class="login-section">
+            <div class="login-form">
+                <h2>User Login</h2>
+                <form id="login-form" action="user.php" method="post">
+                    <div class="form-group">
+                        <label for="login-username">Username</label>
+                        <input type="text" id="login-username" name="username" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="login-password">Password</label>
+                        <input type="password" id="login-password" name="password" required>
+                    </div>
+                    <div class="form-group">
+                        <button type="submit" class="btn">Login</button>
+                    </div>
+                </form>
+                <p class="toggle-btn" onclick="toggleForm()">Register</p>
+                <p class="logout-btn" onclick="handleLogout()">Log Out</p>
+            </div>
+            <div class="register-form" style="display: none;">
+                <h2>Register</h2>
+                <form id="register-form" action="register.php" method="post" onsubmit="return validateForm()">
+                    <div class="form-group">
+                        <label for="reg-username">Username</label>
+                        <input type="text" id="reg-username" name="username" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="reg-password">Password</label>
+                        <input type="password" id="reg-password" name="password" required>
+                        <span class="toggle-password" onclick="togglePassword('reg-password')">👁️</span>
+                    </div>
+                    <div class="form-group">
+                        <label for="reg-email">Email</label>
+                        <input type="email" id="reg-email" name="email" required>
+                    </div>
+                    <div class="form-group">
+                        <button type="submit" class="btn">Register</button>
+                    </div>
+                </form>
+                <p class="toggle-btn" onclick="toggleForm()">Back to Login</p>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function redirectToAdmission() {
+            window.location.href = 'loginadmission.html';
+        }
+
+        function toggleForm() {
+            const loginForm = document.querySelector('.login-form');
+            const registerForm = document.querySelector('.register-form');
+
+            if (loginForm.style.display === 'none') {
+                loginForm.style.display = 'block';
+                registerForm.style.display = 'none';
+            } else {
+                loginForm.style.display = 'none';
+                registerForm.style.display = 'block';
+            }
+        }
+
+        function togglePassword(fieldId) {
+            var passwordInput = document.getElementById(fieldId);
+            if (passwordInput.type === "password") {
+                passwordInput.type = "text";
+            } else {
+                passwordInput.type = "password";
+            }
+        }
+
+        function validateForm() {
+            // Add your form validation logic here if needed
+            return true;
+        }
+        
+        function handleLogout() {
+            fetch('logout.php', {
+                method: 'POST',
+            })
+            .then(response => response.text())
+            .then(data => {
+                if (data.includes('logout_success')) { // Customize this check based on your server response
+                    alert('You have been logged out.');
+                    // Redirect to login page or clear session data
+                    window.location.href = 'login.html'; // Redirect to login page
+                } else {
+                    alert('Logout failed. Please try again.');
+                }
+            })
+            .catch(error => {
+                console.error('Error:', error);
+                alert('An error occurred. Please try again.');
+            });
+        }
+    </script>
+</body>
+</html>
